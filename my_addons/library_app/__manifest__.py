@@ -22,7 +22,8 @@
     'depends': ['base'],
 
     # always loaded
-    'data': ["security/library_security.xml", "security/ir.model.access.csv", "views/library_menu.xml", ],
+    'data': ["security/library_security.xml", "security/ir.model.access.csv",
+             "views/library_menu.xml", "views/book_view.xml",],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
