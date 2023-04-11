@@ -774,7 +774,7 @@ class ProductTemplate(models.Model):
 
     def _search_qty_available(self, operator, value):
         domain = [('qty_available', operator, value)]
-        product_variant_query = self.env['product.product']._search(domain)
+        product_variant_query: object = self.env['product.product']._search(domain)
         return [('product_variant_ids', 'in', product_variant_query)]
 
     def _search_virtual_available(self, operator, value):

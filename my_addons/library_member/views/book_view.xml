@@ -1,0 +1,32 @@
+<odoo>
+
+<!--  Add a field name="is_available" to a XML ID="library_app.view_form_book" with
+        name="inherit_id" method    -->
+  <record id="view_form_book_extend" model="ir.ui.view">
+    <field name="name">Book: add Is Available?</field>
+    <field name="model">library.book</field>
+<!--    inherit from ref="library_app.view_form_book"   -->
+    <field name="inherit_id" ref="library_app.view_form_book"/>
+    <field name="arch" type="xml">
+
+
+      <!--      Where to add a new field  -->
+      <field name="isbn" position="after">
+      <!--  The field to add   -->
+        <field name="is_available" />
+      </field>
+
+<!--      Hide the field name="isbn" by invisible="True"   -->
+<!--      <field name="isbn" position="attributes">-->
+<!--        <attribute name="invisible">True</attribute>-->
+<!--      </field>-->
+
+<!--      Move the existing field name="name" to the position of field name="isbn"   -->
+<!--      <field name="isbn" position="after">-->
+<!--        <field name="name" position="move"/>-->
+<!--      </field>-->
+
+
+    </field>
+  </record>
+</odoo>

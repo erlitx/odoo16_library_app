@@ -10,7 +10,6 @@ class Books(http.Controller):
         return http.request.render("library_app.book_list_template", {"books": books})
 
 
-class LibraryApp(http.Controller):
     @http.route('/library', auth='public')
     def index(self, **kw):
         return "Hello, world"

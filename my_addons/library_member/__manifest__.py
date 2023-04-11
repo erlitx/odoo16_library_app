@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Library Management",
+    'name': "Library Member",
 
     'summary': """
-        Manage library catalog""",
+        Add a custom field to library_app """,
 
     'description': """
         Long description of module's purpose
@@ -17,16 +17,9 @@
     # for the full list
     'category': 'Services/Library',
     'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base', 'product',],
-
-    # always loaded
-    'data': ["security/library_security.xml", "security/ir.model.access.csv",
-             "views/library_menu.xml", "views/book_view.xml", "views/book_list_template.xml",],
+    'depends': ['library_app', 'mail'],
+    'data': ["security/ir.model.access.csv", "views/book_view.xml", "views/library_menu.xml", "views/member_view.xml",],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
-    'application': True
+    'demo': ["data/res.partner.csv", "data/library.book.csv", "data/book_demo.xml"],
+    'application': False
 }

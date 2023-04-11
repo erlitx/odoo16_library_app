@@ -1,0 +1,21 @@
+<odoo>
+
+<!--  Add a field name="is_available" to a XML ID="library_app.view_form_book" with
+        name="inherit_id" method    -->
+  <record id="crm_lead_view_form_extended" model="ir.ui.view">
+    <field name="name">CRM TEST FORM</field>
+    <field name="model">crm.lead</field>
+<!--    inherit from ref="library_app.view_form_book"   -->
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="arch" type="xml">
+
+      <!--      Where to add a new field  -->
+      <field name="tag_ids" position="after">
+      <!--  The field to add   -->
+       <field name="product_id" string="Product" class="text-danger" domain="[('type', '=', 'service')]"/>
+
+      </field>
+
+    </field>
+  </record>
+</odoo>

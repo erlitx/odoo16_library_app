@@ -1,22 +1,20 @@
 <odoo>
 
-  <!-- Library App Menu -->
+  <!-- Creating a top level App MENU with name 'Library' by adding a new record
+  to 'ur.ui.menu' with <menuitem> method  -->
   <menuitem id="menu_library" name="Library" />
 
-  <!-- Action to open the Book list -->
+  <!-- Adding action to open the 'Book' menu item as a list/tree or form -->
   <record id="action_library_book" model="ir.actions.act_window">
     <field name="name">Library Books</field>
     <field name="res_model">library.book</field>
     <field name="view_mode">tree,form</field>
   </record>
-  <!-- Old act_window, deprecated
-  <act_window id="action_library_book"
-    name="Library Books"
-    res_model="library.book"
-    view_mode="tree,form"
-  />
-  -->
-  <!-- Menu item to open the Book list -->
+
+
+  <!-- Menu item to open the Books list
+       WARNING: needed to link menu 'Books' with action 'action_library_book'.
+       Without this menu Books and top level App Library do not appear in UI-->
   <menuitem id="menu_library_book"
     name="Books"
     parent="menu_library"

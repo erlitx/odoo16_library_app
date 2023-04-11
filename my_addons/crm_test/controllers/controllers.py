@@ -1,17 +1,6 @@
 # -*- coding: utf-8 -*-
 # from odoo import http
 
-
-
-def print_person_info(name, age):
-    print(f"Name: {name}")
-    print(f"Age: {age}")
-
-
-person = {'name': 'John', 'age': 25}
-
-print_person_info(**person)
-
 # class CrmTest(http.Controller):
 #     @http.route('/crm_test/crm_test', auth='public')
 #     def index(self, **kw):

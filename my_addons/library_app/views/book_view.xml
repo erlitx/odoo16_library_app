@@ -16,6 +16,9 @@
         <field name="date_published" />
         <field name="isbn" />
         <field name="active" />
+        <field name="unit_product_id"/>
+        <field name="default_code"/>
+
         <field name="image" widget="image" />
     </group>
     </sheet>
