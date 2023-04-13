@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_snt_rassvet_snt_meeting,snt_rassvet.snt_meeting,model_snt_meeting,base.group_user,1,1,1,1
+access_snt_rassvet_snt_protocol,snt_rassvet.snt_protocol,model_snt_protocol,base.group_user,1,1,1,1
+access_snt_rassvet_snt_question,snt_rassvet.snt_question,model_snt_question,base.group_user,1,1,1,1

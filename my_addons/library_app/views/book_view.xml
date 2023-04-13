@@ -18,7 +18,10 @@
         <field name="active" />
         <field name="unit_product_id"/>
         <field name="default_code"/>
-
+        <field name="last_borrow_date"/>
+        <field name="publisher_country_id"/>
+        <field name="publisher_country_id2"/>
+        <field name="highlighted_id"/>
         <field name="image" widget="image" />
     </group>
     </sheet>

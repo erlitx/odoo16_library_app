@@ -12,7 +12,9 @@
       <!--      Where to add a new field  -->
       <field name="tag_ids" position="after">
       <!--  The field to add   -->
-       <field name="product_id" string="Product" class="text-danger" domain="[('type', '=', 'service')]"/>
+       <field name="product_id" string="Product" class="text-danger" domain="[('type', '=', 'service')]"
+              widget="many2many_tags" attrs="{'invisible': [('probability', '&lt;', 10)]}"
+              options="{'color_field': 'color', 'no_create_edit': True}" />
 
       </field>
 

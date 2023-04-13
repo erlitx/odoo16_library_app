@@ -1,0 +1,14 @@
+<odoo>
+
+  <record id="snt_rassvet.meeting_tree_new" model="ir.ui.view">
+  <field name="name">SNT Meetings tree</field>
+  <field name="model">snt.meeting</field>
+  <field name="arch" type="xml">
+    <tree>
+      <field name="name"/>
+      <field name="date"/>
+    </tree>
+  </field>
+</record>
+
+</odoo>

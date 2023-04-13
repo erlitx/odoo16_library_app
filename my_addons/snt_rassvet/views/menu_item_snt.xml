@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="snt_rassvet.action_sntwindow" model="ir.actions.act_window">
+            <field name="name">Meetings_action</field>
+            <field name="res_model">snt.meeting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="snt_rassvet.menu_root" name="SNT Rassvet" />
+
+        <menuitem id="snt_rassvet.menu_meetings" name="Meetings"
+                  parent="snt_rassvet.menu_root" action="snt_rassvet.action_sntwindow" />
+
+    </data>
+</odoo>
