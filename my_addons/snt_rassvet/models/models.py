@@ -9,23 +9,26 @@ class Meeting(models.Model):
     member_ids = fields.Many2many('res.users', string='Members')
     protocol_id = fields.Many2one('snt.protocol', string='Protocol')
     test_field = fields.Char("Test")
+    members_count = fields.Integer(string='Members number', compute='_onchange_compute_members_count')
 
     # Decorator @api.constrains makes Odoo to call the function when the field 'name' is trying to be saved
-    @api.constrains('name')
+    # Check if the name of the meeting is unique.
+    @api.constrains('member_ids')
     def check_name(self):
-        if len(self.name) < 5:
-            raise exceptions.ValidationError('Name too short')
+        # Search for the records with the same name and different id (to exclude the current record)
+        existing_record = self.search([('name', '=', self.name), ('id', '!=', self.id)])
+        _existing_record = existing_record.browse(existing_record)
+        if existing_record:
+            names = [rec.name for rec in existing_record]
+            message = f"Meeting(s) with name '{', '.join(names)}' already exist!"
+            raise exceptions.ValidationError(message)
 
     # Decorator @api.onchange makes Odoo to call the function when the field 'partner_id' is changed in the form
     # and it returns a new value 'self.mt_contractid = sel[0]' to the field 'mt_contractid' in this from
-    # @api.onchange('partner_id')
-    # def get_contact(self):
-    #     if self.partner_id:
-    #         contr = self.env['partner.contract.customer'].search([('partner_id', self.partner_id.id)])
-    #     if contr:
-    #         sel = contr.sorted(key=lambda r: r.date_start, reverse=True)
-    #     if sel:
-    #         self.mt_contractid = sel[0]
+    @api.onchange('member_ids')
+    def _onchange_compute_members_count(self):
+        self.members_count = len(self.member_ids)
+
 
 
 class Protocol(models.Model):

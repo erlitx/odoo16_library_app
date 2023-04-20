@@ -41,14 +41,16 @@ class Book(models.Model):
     default_code = fields.Char('Default Code', related='unit_product_id.default_code', readonly=True)
     highlighted_id = fields.Reference([('res.partner', 'Partner'), ('res.users', 'User')], string="Highlighted By",)
 
-    # Relational field. This is a shortcut for the "publisher_id.country_id" computed field with a method "_compute_publisher_country"
+    # Related field.
+    # This is a shortcut for the "publisher_id.country_id" computed field with a method "_compute_publisher_country"
     # It's do the same as the field "publisher_country_id" below
     # It's refer to the "res.country" model becuase the field "publisher_id.country_id" is a chain of Many2one fields leading to
     # the "res.country" model. (library.book) publisher_id -> res.partner (country_id) -> res.country
     publisher_country_id2 = fields.Many2one("res.country", string="Publisher Country (rel)", related="publisher_id.country_id",
                                             readonly=False,)
 
-    # It's a computed field. Through a compute="" defines that the field is computed field, and it doesn't have a value in the database
+    # Computed field.
+    # Through a compute="" defines that the field is computed field, and it doesn't have a value in the database
 
     # Inverse="" function call "_inverse_publisher_country" method when the value of the field "publisher_country_id" is changed
     # and change the value of the field "publisher_id.country_id" to the value of the field "publisher_country_id"
@@ -61,8 +63,8 @@ class Book(models.Model):
 
 
     # The decorator @api.depends() calls the function whenever the value of the field "publisher_id.country_id" changes.
-    # When the function is called, the value of the field "publisher_country_id" is updated to the all records
-    # of "publisher_country_id" in the model. This is because we want to update this ref filed (publisher_country_id)
+    # When the function is called, the value of the field "publisher_country_id" is updated to all records
+    # of "publisher_country_id" in the model. This is because we want to update this ref field (publisher_country_id)
     # to all the records referred to it
     @api.depends("publisher_id.country_id")
     def _compute_publisher_country(self):

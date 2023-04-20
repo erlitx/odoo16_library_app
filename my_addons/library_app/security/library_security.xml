@@ -1,7 +1,7 @@
 <odoo>
 
   <data>
-  <!-- Library User Group -->
+  <!-- Creating a record 'library_group_user' with name 'User' - Library User Group -->
   <record id="library_group_user" model="res.groups">
     <field name="name">User</field>
     <field name="category_id" ref="base.module_category_services_library"/>

@@ -12,6 +12,7 @@
 
             <group>
                 <field name="protocol_id" />
+                <field name="members_count" />
             </group>
             <notebook>
                 <page name="question" string="Questions">
