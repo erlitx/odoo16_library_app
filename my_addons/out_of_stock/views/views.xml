@@ -1,0 +1,21 @@
+<odoo>
+
+      <record id="crm_lead_view_form_extended" model="ir.ui.view">
+    <field name="name">Description Field Add</field>
+    <field name="model">product.template</field>
+<!--    inherit from ref="library_app.view_form_book"   -->
+    <field name="inherit_id" ref="product.product_template_tree_view"/>
+    <field name="arch" type="xml">
+
+      <!--      Where to add a new field  -->
+      <field name="uom_id" position="after">
+      <!--  The field to add   -->
+       <field name="some_description" />
+
+      </field>
+
+    </field>
+  </record>
+
+
+</odoo>

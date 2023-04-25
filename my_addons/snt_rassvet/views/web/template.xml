@@ -1,0 +1,65 @@
+<odoo>
+
+<template id="hello" name="SNT List">
+
+<div class="page">
+  <t t-set="head_assets">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  </t>
+  <html>
+    <head>
+      <t t-out="head_assets"/>
+      <title>My Template</title>
+    </head>
+    <body>
+
+
+
+
+  <div id="wrap" class="container">
+    <h3>Список общих собраний СНТ "Рассвет"</h3>
+      <div class="row bg-secondary">
+        <div class="col-8">Название собрания</div>
+        <div class="col-2">Дата</div>
+      </div>
+
+      <t t-foreach="meetings" t-as="meeting">
+        <div class="row">
+          <div class="col-8">
+            <span t-out="meeting.name"/>
+          </div>
+          <div class="col-2">
+            <span t-out="meeting.date"/>
+          </div>
+        </div> <!-- end row -->
+      </t> <!-- end foreach -->
+  </div>
+<br/><br/>
+  <div id="wrap" class="container">
+    <h3>Список участников СНТ "Рассвет"</h3>
+      <div class="row bg-secondary">
+        <div class="col-2">Id</div>
+        <div class="col-6">Имя</div>
+      </div>
+
+      <t t-foreach="meetings.member_ids" t-as="member">
+        <div class="row">
+          <div class="col-2">
+            <span t-out="member.id"/>
+          </div>
+          <div class="col-6">
+            <span t-out="member.name"/>
+          </div>
+
+
+        </div> <!-- end row -->
+      </t> <!-- end foreach -->
+  </div>
+
+    </body>
+  </html>
+
+</div> <!-- end page -->
+</template>
+
+</odoo>

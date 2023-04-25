@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Library Management",
+    'name': "out_of_stock",
 
     'summary': """
-        Manage library catalog""",
+        This module is used to track products that are not available at a particular location""",
 
     'description': """
         Long description of module's purpose
@@ -11,23 +11,25 @@
 
     'author': "My Company",
     'website': "https://www.yourcompany.com",
-    'license': 'AGPL-3',
+
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Services/Library',
+    'category': 'Uncategorized',
     'version': '0.1',
+    'license': 'AGPL-3',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'product',],
 
     # always loaded
-    'data': ["security/library_security.xml", "security/ir.model.access.csv",
-             "views/library_menu.xml", "views/book_view.xml", "views/book_list_template.xml",
-             "reports/library_book_report.xml",],
+    'data': [
+        # 'security/ir.model.access.csv',
+        'views/views.xml',
+        'views/templates.xml',
+    ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
-    'application': True
 }

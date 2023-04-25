@@ -5,14 +5,19 @@
     <field name="arch" type="xml">
 
     <form>
+        <header>
+                <button string="Check members" type="object" name="kvorum_check" class="btn-primary"/>
+        </header>
         <sheet string="snt.meeting">
 
                 <h1><field name="name" /></h1>
-                <h2><field name="date" /></h2>
+
+                <h3><field name="date"/></h3>
 
             <group>
-                <field name="protocol_id" />
+                <field name="protocol_id"/>
                 <field name="members_count" />
+                <field name="date_compute"/>
             </group>
             <notebook>
                 <page name="question" string="Questions">
@@ -21,7 +26,8 @@
                         <field name="name"/>
                         <field name="yes"/>
                         <field name="state"/>
-                        <field name="meeting_id"/>
+<!--                        Setting a default value of meething_id field to active record (meeting_id)-->
+                        <field name="meeting_id" context="{'default_meeting_id': active_id}"/>
                     </tree>
                 </field>
                 </page>

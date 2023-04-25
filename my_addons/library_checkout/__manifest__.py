@@ -11,5 +11,6 @@
         "views/library_menu.xml",
         "views/checkout_view.xml",
         "views/library_checkout_stage.xml",
+        "wizard/checkout_mass_message_wizard_view.xml",
     ],
 }

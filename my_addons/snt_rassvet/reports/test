@@ -1,0 +1,78 @@
+<odoo>
+
+<template id="template_snt_meeting">
+<!--  set an HTML structure-->
+    <t t-call="web.html_container">
+<!--      Use header and footer -->
+      <t t-call="web.external_layout">
+
+
+        <div class="page">
+
+        <t t-set="head_assets">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  </t>
+  <html>
+    <head>
+      <t t-raw="head_assets"/>
+      <title>My Template</title>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Hello, Bootstrap!</h1>
+        <p>This is a paragraph of text.</p>
+        <button class="btn btn-primary">Click me!</button>
+      </div>
+    </body>
+  </html>
+
+<!--          docs is a current record or recordset if few chosen in a tree view-->
+            <t t-foreach="docs" t-as="o"> <!-- this is a loop -->
+            <div class="container">
+
+               <h3><t t-out="o.name"/> от <t t-out="o.date"/></h3>
+                 <div class="col-3"><span t-out="user"/></div>
+             </div>
+
+
+          <!-- Report header content -->
+          <div class="container">
+            <div class="row bg-secondary">
+              <div class="col-3">Title</div>
+              <div class="col-2">Publisher</div>
+              <div class="col-2">Date</div>
+              <div class="col-3">Publisher Address</div>
+              <div class="col-2">Authors</div>
+            </div>
+
+            <!-- Report body content -->
+            <t t-foreach="docs" t-as="o">
+                <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                  <div class="col-3">
+
+                  </div>
+                  <div class="col-2">
+
+                  </div>
+
+                </div> <!-- end row -->
+            </t> <!-- end foreach -->
+
+          </div> <!-- end container -->
+        </t> <!-- end foreach -->
+        </div> <!-- end page -->
+
+
+      </t>
+    </t>
+  </template>
+</odoo>

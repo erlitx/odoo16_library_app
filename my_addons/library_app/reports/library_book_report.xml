@@ -1,0 +1,130 @@
+<odoo>
+<!-- Paper format-->
+  <record id="paperformat_euro_landscape" model="report.paperformat">
+    <field name="name">A4 Portrait</field>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">40</field>
+    <field name="margin_bottom">32</field>
+    <field name="margin_left">7</field>
+    <field name="margin_right">7</field>
+    <field name="header_line" eval="True" />
+    <field name="header_spacing">35</field>
+    <field name="dpi">90</field>
+  </record>
+
+<!--  set an unique id of the action-->
+  <record id="action_library_book_report" model="ir.actions.report">
+    <field name="name">Book Catalog</field>
+    <field name="model">library.book</field>
+    <field name="report_type">qweb-html</field>
+<!--      Refferes to a particular template defined in this file 'id="book_catalog"-->
+    <field name="report_name">library_app.book_catalog</field>
+    <field name="binding_model_id" ref="model_library_book" />
+    <field name="binding_type">report</field>
+<!--    ref to the format xml id -->
+    <field name="paperformat_id" ref="paperformat_euro_landscape" />
+  </record>
+
+<!--  Create Template -->
+<template id="book_catalog">
+<!--  set an HTML structure-->
+    <t t-call="web.html_container">
+<!--      Use header and footer -->
+      <t t-call="web.external_layout">
+
+
+        <div class="page">
+<!--          docs is a current record or recordset if few chosen in a tree view-->
+             <div class="container">
+<!--                 <span t-field="docs.date_published" t-options="{'widget': 'date'}"/>-->
+               <h2>Hello World!</h2>
+                 <div class="col-3"><span t-out="user"/></div>
+             </div>
+
+
+          <!-- Report header content -->
+          <div class="container">
+            <div class="row bg-secondary">
+              <div class="col-3">Title</div>
+              <div class="col-2">Publisher</div>
+              <div class="col-2">Date</div>
+              <div class="col-3">Publisher Address</div>
+              <div class="col-2">Authors</div>
+            </div>
+
+            <!-- Report body content -->
+            <t t-foreach="docs" t-as="o">
+                <div class="row">
+                    <div class="col-3">
+                        <span t-field="o.name"/>
+                    </div>
+                    <div class="col-2">
+                        <span t-field="o.publisher_id"/>
+                    </div>
+                    <div class="col-2">
+                        <span t-field="o.date_published" t-options="{'widget': 'date'}"/>
+                    </div>
+                  <div class="col-3">
+                      <div t-field="o.publisher_id"
+                           t-options='{
+                             "widget": "contact",
+                             "fields": ["address", "email", "phone", "website"], "no_marker": true}' />
+                  </div>
+                  <div class="col-2">
+                  <!-- Render Authors -->
+                      <ul class="list-unstyled">
+                        <t t-foreach="o.author_ids" t-as="author">
+                            <span t-field="author.image_128"
+                                  t-options="{'widget': 'image', 'style': 'max-width: 32px'}" />
+                            <span t-field="author.name" />
+                        </t>
+                      </ul>
+                  </div>
+
+                </div> <!-- end row -->
+            </t> <!-- end foreach -->
+
+                     <!-- Report footer content -->
+          <div class="row">
+            <div class="col-3">
+              <t t-out="len(docs)" /> Books
+            </div>
+            <div class="col-7" />
+            <div class="col-2">
+              <t t-out="len(docs.mapped('author_ids'))" /> Authors
+            </div>
+          </div>
+
+
+          </div> <!-- end container -->
+        </div> <!-- end page -->
+
+
+      </t>
+    </t>
+  </template>
+
+
+
+<!-- action for another print report-->
+  <record id="action_library_book_report_native"
+          model="ir.actions.report">
+    <field name="name">Native Language Book Catalog</field>
+    <field name="model">library.book</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">library_app.book_catalog_native</field>
+    <field name="binding_model_id" ref="model_library_book" />
+    <field name="binding_type">report</field>
+    <field name="paperformat_id" ref="paperformat_euro_landscape" />
+  </record>
+
+
+<!--another print report template -->
+  <template id="book_catalog_native">
+<!--      renders existing template 'book_catalog' with t-lang-->
+    <t t-call="library_app.book_catalog"
+       t-lang="res_company.partner_id.lang" />
+  </template>
+
+</odoo>

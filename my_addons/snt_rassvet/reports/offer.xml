@@ -1,0 +1,23 @@
+<!--<?xml version="1.0"?>-->
+<odoo>
+
+<!--Action to show a PRINT  button in a form and tree view of snt.meeting model -->
+  <record id="action_snt_rassvet_meeting_report" model="ir.actions.report">
+    <field name="name">Meeting Protocol</field>
+    <field name="model">snt.meeting</field>
+    <field name="report_type">qweb-html</field>
+<!--      Refferes to a particular template defined in this file 'id="book_catalog"-->
+    <field name="report_name">snt_rassvet.template_snt_meeting</field>
+<!--    the model where a report should be available-->
+    <field name="binding_model_id" ref="model_snt_meeting" />
+
+    <field name="binding_type">report</field>
+<!--    ref to the format xml id (defined in 'library_app' with an id=paperformat_euro_landscape-->
+    <field name="paperformat_id" ref="library_app.paperformat_euro_landscape" />
+  </record>
+
+
+
+
+
+</odoo>

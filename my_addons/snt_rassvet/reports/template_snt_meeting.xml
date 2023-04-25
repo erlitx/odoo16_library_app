@@ -1,0 +1,66 @@
+<odoo>
+
+<template id="template_snt_meeting">
+
+<div class="page">
+  <t t-set="head_assets">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  </t>
+  <html>
+    <head>
+      <t t-out="head_assets"/>
+      <title>My Template</title>
+    </head>
+    <body>
+
+    </body>
+  </html>
+
+<!--          docs is a current record or recordset if few chosen in a tree view-->
+            <t t-foreach="docs" t-as="o"> <!-- this is a loop -->
+            <div class="container">
+               <h3><t t-out="o.name"/> от <t t-out="o.date"/></h3>
+             </div>
+
+
+          <!-- Report header content -->
+          <div class="container">
+              <br/>
+              <b>Список участников собрания:</b><br/>
+
+              <t t-foreach="o.member_ids" t-as="m">
+                  <li><span t-field="m.name"/><br/></li>
+              </t>
+
+              <b>Всего присутствовало дачников: <span t-field="o.members_count"/></b>
+            <br/><br/>
+
+
+            <div class="row bg-secondary">
+              <div class="col-8">Вопрос</div>
+              <div class="col-2">Решение</div>
+            </div>
+
+            <!-- Report body content -->
+            <t t-foreach="o.question_ids" t-as="q">
+                <div class="row">
+                    <div class="col-8">
+                        <span t-out="q.name"/>
+                    </div>
+                    <div class="col-2">
+                        <span t-out="q.state"/>
+                    </div>
+
+
+                </div> <!-- end row -->
+
+            </t> <!-- end foreach -->
+<br/>
+          </div> <!-- end container -->
+        </t> <!-- end foreach -->
+        </div> <!-- end page -->
+
+
+
+  </template>
+</odoo>

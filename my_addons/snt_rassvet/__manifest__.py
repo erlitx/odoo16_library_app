@@ -23,7 +23,8 @@
 
     # always loaded
     'data': ["views/menu_item_snt.xml", "security/ir.model.access.csv", "views/tree_view_meetings_snt_rassvet.xml",
-             "views/form_view_meetings_snt_rassvet.xml",],
+             "views/form_view_meetings_snt_rassvet.xml", "reports/offer.xml", "reports/template_snt_meeting.xml",
+             "views/web/template.xml",],
 
     # only loaded in demonstration mode
     'demo': [],
