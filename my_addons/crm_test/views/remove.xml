@@ -1,0 +1,13 @@
+<odoo>
+
+<record id="view_partner_inherit2" model="ir.ui.view">
+    <field name="name">partner.inherit2</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_tree_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='vat']" position="replace">
+            <!-- Replace with an empty element to remove the field -->
+        </xpath>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+       <record id="out_of_stock.tree_view_out_of_stock" model="ir.ui.view">
+          <field name="name">Out of Stock tree view</field>
+          <field name="model">stock.quant</field>
+          <field name="arch" type="xml">
+              <tree>
+                <field name="product_id"/>
+                <field name="warehouse_id" optional="show"/>
+                <field name="location_id" optional="show"/>
+                <field name="available_quantity" optional="show"/>
+                <field name="quantity" optional="show"/>
+                <field name="reserved_quantity" optional="show"/>
+              </tree>
+          </field>
+        </record>
+
+    </data>
+</odoo>

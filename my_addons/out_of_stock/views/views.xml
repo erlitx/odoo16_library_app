@@ -7,10 +7,16 @@
     <field name="inherit_id" ref="product.product_template_tree_view"/>
     <field name="arch" type="xml">
 
+<!--      <field name="default_code" position="replace">-->
+<!--            &lt;!&ndash; Replace with an empty element to remove the field &ndash;&gt;-->
+<!--      </field>-->
+
       <!--      Where to add a new field  -->
       <field name="uom_id" position="after">
       <!--  The field to add   -->
-       <field name="some_description" />
+<!--       <field name="qoh_location1" />-->
+<!--       <field name="some_description" />-->
+
 
       </field>
 

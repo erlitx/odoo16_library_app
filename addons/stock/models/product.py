@@ -123,8 +123,22 @@ class Product(models.Model):
     def _compute_quantities(self):
         products = self.filtered(lambda p: p.type != 'service')
         res = products._compute_quantities_dict(self._context.get('lot_id'), self._context.get('owner_id'), self._context.get('package_id'), self._context.get('from_date'), self._context.get('to_date'))
+        # print('+++++++++++++++' + str(res) + '++++++++++++++++++')
+        # iterate over the products of 'product.product' model
+        # for each product (product.product) gets an id and get a value for this id from 'res' dictionary
+        # beacuase 'res' is a dictionary with key = id and value = value for this id: here the example
+        # {31: {'qty_available': 116.0, 'free_qty': 96.0, 'incoming_qty': 35.0, 'outgoing_qty': 20.0,
+        #       'virtual_available': 131.0},
+        #  21: {'qty_available': 33.0, 'free_qty': 18.0, 'incoming_qty': 120.0, 'outgoing_qty': 15.0,
+        #       'virtual_available': 138.0}
         for product in products:
             product.update(res[product.id])
+            # return of res.[product.id] is
+            # {'qty_available': 0.0, 'free_qty': 0.0, 'incoming_qty': 0.0, 'outgoing_qty': 0.0, 'virtual_available': 0.0}
+            # with update() method we update the product.product model with the values of the dictionary, keys are the
+            # fields of the model
+            # print('++++++stock/product.py+++++++++' + str(res[product.id]) + '++++++++++++++++++')
+
         # Services need to be set with 0.0 for all quantities
         services = self - products
         services.qty_available = 0.0
@@ -170,6 +184,8 @@ class Product(models.Model):
         domain_move_out_todo = [('state', 'in', ('waiting', 'confirmed', 'assigned', 'partially_available'))] + domain_move_out
         moves_in_res = dict((item['product_id'][0], item['product_qty']) for item in Move._read_group(domain_move_in_todo, ['product_id', 'product_qty'], ['product_id'], orderby='id'))
         moves_out_res = dict((item['product_id'][0], item['product_qty']) for item in Move._read_group(domain_move_out_todo, ['product_id', 'product_qty'], ['product_id'], orderby='id'))
+        # this return a dict with 'product_id, quantity and reserved_quantity' as keys and values
+        # as the SUM of agregated values of the fileds 'quantity' and 'reserved_quantity' get for each product_id by _read_group() and filteret by domain_quant
         quants_res = dict((item['product_id'][0], (item['quantity'], item['reserved_quantity'])) for item in Quant._read_group(domain_quant, ['product_id', 'quantity', 'reserved_quantity'], ['product_id'], orderby='id'))
         if dates_in_the_past:
             # Calculate the moves that were done before now to calculate back in time (as most questions will be recent ones)
@@ -705,6 +721,8 @@ class ProductTemplate(models.Model):
         'product_variant_ids.incoming_qty',
         'product_variant_ids.outgoing_qty',
     )
+    # Method get a dict with a product template id as key and 'qty_available', 'virtual_available',
+    # 'incoming_qty', 'outgoing_qty' as values for a particular product template
     def _compute_quantities(self):
         res = self._compute_quantities_dict()
         for template in self:
@@ -713,9 +731,18 @@ class ProductTemplate(models.Model):
             template.incoming_qty = res[template.id]['incoming_qty']
             template.outgoing_qty = res[template.id]['outgoing_qty']
 
+
     def _compute_quantities_dict(self):
+        # self is a 'product.template' record
+        # 'product.variant_ids' is a One2many field of 'product.template' <- 'product.product'
+        # 'p' is a list of dicts  [{'id': 31, 'qty_available': 116.0, 'virtual_available': 131.0, 'incoming_qty': 35.0, 'outgoing_qty': 20.0}, ]
+        # the output of 'variants_available' is {
+        #     31: {'id': 31, 'qty_available': 116.0, 'virtual_available': 131.0},
+        #     21: {'id': 21, 'qty_available': 33.0, 'virtual_available': 138.0}
+        # }
         variants_available = {
-            p['id']: p for p in self.product_variant_ids._origin.read(['qty_available', 'virtual_available', 'incoming_qty', 'outgoing_qty'])
+            p['id']: p for p in self.product_variant_ids._origin.read(['qty_available', 'virtual_available',
+                                                                       'incoming_qty', 'outgoing_qty'])
         }
         prod_available = {}
         for template in self:
@@ -723,11 +750,15 @@ class ProductTemplate(models.Model):
             virtual_available = 0
             incoming_qty = 0
             outgoing_qty = 0
+        # Going over each product.product in each product.template and
+        # summing the quantities of all the variants of the template using a dict 'variants_available'
             for p in template.product_variant_ids._origin:
                 qty_available += variants_available[p.id]["qty_available"]
                 virtual_available += variants_available[p.id]["virtual_available"]
                 incoming_qty += variants_available[p.id]["incoming_qty"]
                 outgoing_qty += variants_available[p.id]["outgoing_qty"]
+        # The result is a dict 'prod_available' with the template id as key and the sum of the quantities as value
+        # the result of qty_available is sum of all the variants(product.product) of the template
             prod_available[template.id] = {
                 "qty_available": qty_available,
                 "virtual_available": virtual_available,
@@ -735,6 +766,7 @@ class ProductTemplate(models.Model):
                 "outgoing_qty": outgoing_qty,
             }
         return prod_available
+
 
     def _compute_nbr_moves(self):
         res = defaultdict(lambda: {'moves_in': 0, 'moves_out': 0})
@@ -771,7 +803,7 @@ class ProductTemplate(models.Model):
             'view_mode': 'list',
             'domain': domain,
         }
-
+ # Changes the default search method over product.template to search on the product.product table
     def _search_qty_available(self, operator, value):
         domain = [('qty_available', operator, value)]
         product_variant_query: object = self.env['product.product']._search(domain)

@@ -18,6 +18,10 @@ class ProductTemplate(models.Model):
     _description = "Product"
     _order = "priority desc, name"
 
+    # tools.ormcache() is used to cache the result of the function for the default values.
+    # self.env.ref() return a single record with given xml_id (product.product_category_all)
+    # ref() is used to get the record from the xml_id.
+    # 'product.product_category_all' is the xml_id of the record which corresponds to the category 'All' in the product category.
     @tools.ormcache()
     def _get_default_category_id(self):
         # Deletion forbidden (at least through unlink)

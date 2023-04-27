@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="action_out_of_stock_quants">
+            <field name="name">Out of Stock</field>
+            <field name="res_model">stock.quant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_view_out_of_stock"/>
+        </record>
+
+
+<!--    id="out_of_stock.out_report"  is a Report menu item     -->
+        <menuitem id="out_of_stock.out_report" name="Out of Stock" action="action_out_of_stock_quants"
+        parent="stock.menu_warehouse_report" />
+
+<!--    <record model="ir.actions.act_window" id="action_library_checkout">-->
+<!--      <field name="name">Checkouts</field>-->
+<!--      <field name="res_model">library.checkout</field>-->
+<!--      <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+    </data>
+</odoo>

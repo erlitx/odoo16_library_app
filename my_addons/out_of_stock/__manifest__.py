@@ -20,13 +20,14 @@
     'license': 'AGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'product',],
+    'depends': ['base', 'product', 'stock'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
-        'views/templates.xml',
+        'views/menu_out_of_stock.xml',
+        'views/tree_view_out_of_stock.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
