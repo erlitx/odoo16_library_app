@@ -4,19 +4,49 @@
             <field name="name">Out of Stock</field>
             <field name="res_model">stock.quant</field>
             <field name="view_mode">tree,form</field>
+<!--            # Id of the tree view (in this module). If you want to use the tree view from another module, you -->
+<!--            # need to specify the module name as well.-->
             <field name="view_id" ref="tree_view_out_of_stock"/>
+<!--            # Id of the search view (filters)-->
+            <field name="search_view_id" ref="search_view_out_of_stock"/>
+            <field name="context">{"search_default_out_of_stock": 1}</field>
+<!--            <field name="domain">[('quantity', '&lt;', 10.0)]</field>-->
         </record>
 
 
+        <record model="ir.actions.act_window" id="action_out_of_stock_custom">
+            <field name="name">Out of Stock 2</field>
+            <field name="res_model">stock.quant.out</field>
+            <field name="view_mode">tree,form,search</field>
+<!--            # Id of the tree view (in this module). If you want to use the tree view from another module, you -->
+<!--            # need to specify the module name as well.-->
+            <field name="view_id" ref="tree_view_out_of_stock_custom"/>
+            <!--            # Id of the search view (filters)-->
+<!--            <field name="search_view_id" ref="view_search_out_of_stock"/>-->
+<!--            <field name="context">{"search_default_out_of_stock": 1}</field>-->
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_out_of_stock_inherits">
+            <field name="name">Out of Stock Inherit</field>
+            <field name="res_model">stock.quant.out.inherits</field>
+            <field name="view_mode">tree,form,search</field>
+<!--            # Id of the tree view (in this module). If you want to use the tree view from another module, you -->
+<!--            # need to specify the module name as well.-->
+            <field name="view_id" ref="out_of_stock.tree_view_out_of_stock_inherits"/>
+            <!--            # Id of the search view (filters)-->
+            <field name="search_view_id" ref="view_search_out_of_stock"/>
+<!--            <field name="context">{"search_default_out_of_stock": 1}</field>-->
+        </record>
+
 <!--    id="out_of_stock.out_report"  is a Report menu item     -->
-        <menuitem id="out_of_stock.out_report" name="Out of Stock" action="action_out_of_stock_quants"
+        <menuitem id="out_of_stock.out_report" name="stock.quants" action="action_out_of_stock_quants"
+        parent="stock.menu_warehouse_report" />
+        <menuitem id="out_of_stock.out_report_custom" name="Out of Stock Quants" action="action_out_of_stock_custom"
+        parent="stock.menu_warehouse_report" />
+        <menuitem id="out_of_stock.out_report_inherit" name="Out of Stock Quants 2" action="action_out_of_stock_inherits"
         parent="stock.menu_warehouse_report" />
 
-<!--    <record model="ir.actions.act_window" id="action_library_checkout">-->
-<!--      <field name="name">Checkouts</field>-->
-<!--      <field name="res_model">library.checkout</field>-->
-<!--      <field name="view_mode">tree,form</field>-->
-<!--    </record>-->
 
     </data>
 </odoo>

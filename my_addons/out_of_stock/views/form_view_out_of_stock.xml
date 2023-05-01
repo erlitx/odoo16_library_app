@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+       <record id="out_of_stock.form_view_out_of_stock_custom" model="ir.ui.view">
+          <field name="name">Out of Stock Form</field>
+          <field name="model">stock.quant.out</field>
+          <field name="arch" type="xml">
+              <form>
+                <header>
+                    <button string="My Button" name="populate_stock_quant_out" type="object"/>
+                </header>
+                <sheet>
+                <group>
+                    <field name="quant_out_id"/>
+                    <field name="product_id"/>
+                    <field name="product_tmpl_id"/>
+                    <field name="location_id" optional="show"/>
+                    <field name="available_quantity" optional="show"/>
+                    <field name="quantity" optional="show"/>
+    <!--                <field name="reserved_quantity" optional="show"/>-->
+                    <field name="location_usage" optional="show"/>
+                </group>
+                </sheet>
+
+              </form>
+
+          </field>
+        </record>
+    </data>
+</odoo>

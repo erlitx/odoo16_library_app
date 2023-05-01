@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+       <record id="out_of_stock.tree_view_out_of_stock_custom" model="ir.ui.view">
+          <field name="name">Out of Stock Quants</field>
+          <field name="model">stock.quant.out</field>
+          <field name="arch" type="xml">
+              <tree>
+                <field name="quant_out_id"/>
+                <field name="product_id"/>
+                <field name="product_tmpl_id"/>
+                <field name="location_id" optional="show"/>
+<!--                <field name="available_quantity" optional="show"/>-->
+                <field name="quantity" optional="show"/>
+<!--                <field name="reserved_quantity" optional="show"/>-->
+                <field name="location_usage" optional="show"/>
+              </tree>
+
+          </field>
+        </record>
+
+<!--Add specified filters-->
+        <record id="view_search_out_of_stock" model="ir.ui.view">
+          <field name="name">Out Of Stock</field>
+          <field name="model">stock.quant.out</field>
+          <field name="arch" type="xml">
+<!--              set default filter-->
+            <search>
+              <field name="product_id"/>
+              <field name="product_tmpl_id"/>
+<!--              <filter name="out_of_stock" string="Out of Stock" domain="[]"/>-->
+<!--              <filter name="internal_loc" string="Internal Locations" domain="[('location_id.usage','=', 'internal')]"/>-->
+            </search>
+          </field>
+        </record>
+
+<!--        Add specified filters -->
+        <record id="view_search_out_of_stock2" model="ir.ui.view">
+          <field name="name">Out Of Stock</field>
+          <field name="model">stock.quant.out.inherits</field>
+          <field name="arch" type="xml">
+            <search>
+              <field name="product_id"/>
+              <field name="product_tmpl_id"/>
+              <filter name="filter_inactive" string="Out of Stock" domain="[]"/>
+              <filter name="filter_inactive2" string="Out of Stock2" domain="[]"/>
+              <filter name="filter_inactive3" string="Out of Stock3" domain="[]"/>
+            </search>
+          </field>
+        </record>
+
+       <record id="out_of_stock.tree_view_out_of_stock_inherits" model="ir.ui.view">
+          <field name="name">Out of Stock Quants</field>
+          <field name="model">stock.quant.out.inherits</field>
+          <field name="arch" type="xml">
+              <tree>
+                <field name="product_id"/>
+                <field name="product_tmpl_id"/>
+                <field name="location_id" optional="show"/>
+<!--                <field name="available_quantity" optional="show"/>-->
+                <field name="quantity" optional="show"/>
+<!--                <field name="reserved_quantity" optional="show"/>-->
+              </tree>
+          </field>
+        </record>
+
+    </data>
+</odoo>

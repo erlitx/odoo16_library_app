@@ -28,9 +28,14 @@
         'views/views.xml',
         'views/menu_out_of_stock.xml',
         'views/tree_view_out_of_stock.xml',
-    ],
+        'views/tree_view_out_of_stock_custom.xml',
+        'security/ir.model.access.csv',
+        'views/form_view_out_of_stock.xml',
+],
+        'application': True,
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+
     ],
 }
